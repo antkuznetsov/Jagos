@@ -9,35 +9,22 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 public class User {
 
-    private static final Logger LOGGER = Logger.getLogger(User.class);
-
-    static {
-        DOMConfigurator.configure("log4j.xml");
-    }
-
     private int id;
     private String name;
     private String lastName;
     private String email;
     private String password;
     private int group;
+    private boolean isBlocked;
 
-    public User(int id, String name, String lastName, String email, String password, int group) {
+    public User(int id, String name, String lastName, String email, String password, int group, boolean isBlocked) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.group = group;
-    }
-
-    public User() {
-        this.id = -1;
-        this.name = null;
-        this.lastName = null;
-        this.email = null;
-        this.password = null;
-        this.group = -1;
+        this.isBlocked = isBlocked;
     }
 
     public int getId() {
@@ -88,6 +75,14 @@ public class User {
         this.group = group;
     }
 
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,6 +110,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", group=" + group +
+                ", isBlocked=" + isBlocked +
                 '}';
     }
 }
