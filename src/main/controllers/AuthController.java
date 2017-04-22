@@ -2,6 +2,7 @@ package main.controllers;
 
 import main.services.classes.UserServiceImpl;
 import main.services.interfaces.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,8 @@ import java.io.IOException;
  */
 
 public class AuthController extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(AuthController.class);
 
     private static UserService userService = new UserServiceImpl();
 
@@ -29,12 +32,12 @@ public class AuthController extends HttpServlet {
         String password = req.getParameter("password");
 
         if (userService.auth(email, password) != null) {
+            LOGGER.debug("Пользователь авторизован");
             req.getSession().setAttribute("email", email);
             resp.sendRedirect(req.getContextPath() + "/dashboard/");
-            //Авторизован
         } else {
+            LOGGER.debug("Ошибка авторизации");
             resp.sendRedirect("/auth/");
-            //Обратно на форму
         }
     }
 }

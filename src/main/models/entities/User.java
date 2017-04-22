@@ -1,5 +1,6 @@
 package main.models.entities;
 
+import main.models.classes.UserDaoImpl;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -8,6 +9,8 @@ import org.apache.log4j.xml.DOMConfigurator;
  */
 
 public class User {
+
+    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 
     private int id;
     private String name;

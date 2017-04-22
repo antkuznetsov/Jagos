@@ -3,6 +3,7 @@ package main.models.classes;
 import main.models.MyConnection;
 import main.models.entities.User;
 import main.models.interfaces.UserDao;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
 
-    //private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 
     public User getByEmailAndPassword(String email, String password) {
 
@@ -43,11 +44,10 @@ public class UserDaoImpl implements UserDao {
                         result.getInt(6),
                         result.getBoolean(7)
                 );
-                System.out.println(result.getString(1) + " " + result.getString(2));
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getStackTrace());
         }
         return user;
     }
