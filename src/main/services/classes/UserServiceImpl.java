@@ -6,6 +6,8 @@ import main.models.interfaces.UserDao;
 import main.services.interfaces.UserService;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 /**
  * Created by Kuznetsov on 22/04/2017.
  */
@@ -28,5 +30,9 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
+    }
+
+    public List<User> getList() {
+        return userDao.getList();
     }
 }
