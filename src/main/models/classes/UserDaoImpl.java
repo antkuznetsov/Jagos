@@ -53,6 +53,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     public User getById(int id) {
+
         User user = null;
 
         Connection connection = MyConnection.connect();
@@ -85,9 +86,7 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    public int add(User user) {
-
-        int userId = 0;
+    public void add(User user) {
 
         Connection connection = MyConnection.connect();
 
@@ -103,20 +102,18 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(5, user.getGroup());
             statement.setBoolean(6, user.isBlocked());
 
-            ResultSet demo = statement.executeQuery();
-
-            LOGGER.debug("Добавляем пользователя");
-            LOGGER.debug(demo);
+            if (statement.executeUpdate() > 0) {
+                LOGGER.debug("Пользователь добавлен");
+            } else {
+                LOGGER.debug("Ошибка при добавлении пользователя");
+            }
 
         } catch (SQLException e) {
             LOGGER.error(e.getStackTrace());
         }
-        return userId; //todo: переделать, чтобы возвращал реальный id
     }
 
-    public int delete(int id) {
-
-        int userId = 0;
+    public void delete(int id) {
 
         Connection connection = MyConnection.connect();
 
@@ -127,18 +124,18 @@ public class UserDaoImpl implements UserDao {
 
             statement.setInt(1, id);
 
-            ResultSet result = statement.executeQuery();
+            if (statement.executeUpdate() > 0) {
+                LOGGER.debug("Пользователь удален");
+            } else {
+                LOGGER.debug("Ошибка при удалении пользователя");
+            }
 
         } catch (SQLException e) {
             LOGGER.error(e.getStackTrace());
         }
-
-        return userId;
     }
 
-    public int update(User user) {
-
-        int userId = 0;
+    public void update(User user) {
 
         Connection connection = MyConnection.connect();
 
@@ -155,16 +152,15 @@ public class UserDaoImpl implements UserDao {
             //statement.setInt(5, user.getGroup());
             //statement.setBoolean(6, user.isBlocked());
 
-            ResultSet demo = statement.executeQuery();
-
-            LOGGER.debug("Обновляем пользователя");
-            LOGGER.debug(demo);
+            if (statement.executeUpdate() > 0) {
+                LOGGER.debug("Пользователь обновлен");
+            } else {
+                LOGGER.debug("Ошибка при обновлении пользователя");
+            }
 
         } catch (SQLException e) {
             LOGGER.error(e.getStackTrace());
         }
-        return userId; //todo: переделать, чтобы возвращал реальный id
-
     }
 
     public User getByEmailAndPassword(String email, String password) {
