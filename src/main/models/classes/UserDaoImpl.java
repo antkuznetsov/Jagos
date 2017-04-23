@@ -115,7 +115,25 @@ public class UserDaoImpl implements UserDao {
     }
 
     public int delete(int id) {
-        return 0;
+
+        int userId = 0;
+
+        Connection connection = MyConnection.connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE from users WHERE id = ?"
+            );
+
+            statement.setInt(1, id);
+
+            ResultSet result = statement.executeQuery();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getStackTrace());
+        }
+
+        return userId;
     }
 
     public int update(User user) {

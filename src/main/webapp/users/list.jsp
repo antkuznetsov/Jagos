@@ -89,7 +89,7 @@
                             <td><c:out value="${item.email}"/></td>
                             <td>
                                 <a class="edit" href="?action=edit&id=<c:out value="${item.id}"/>">Редактировать</a>
-                                <a class="delete" href="#">Удалить</a>
+                                <a class="delete" href="?action=delete&id=<c:out value="${item.id}"/>">Удалить</a>
                             </td>
                         </tr>
                     </c:forEach>

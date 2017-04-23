@@ -89,6 +89,10 @@ public class UserController extends HttpServlet {
         } else if ("insert".equalsIgnoreCase(action)) {
 
         } else if ("delete".equalsIgnoreCase(action)) {
+            forward = "/users/list.jsp";
+            userService.delete(Integer.parseInt(req.getParameter("id")));
+            List<User> list = userService.getList();
+            req.setAttribute("list", list);
 
         } else if ("edit".equalsIgnoreCase(action)) {
             req.setAttribute("title", "Изменить пользователя");
