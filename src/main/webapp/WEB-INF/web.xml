@@ -23,6 +23,15 @@
         <url-pattern>/users/</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CourseController</servlet-name>
+        <servlet-class>main.controllers.CourseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseController</servlet-name>
+        <url-pattern>/courses/</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>WhiteList</filter-name>
         <filter-class>main.filters.WhiteList</filter-class>
@@ -30,5 +39,9 @@
     <filter-mapping>
         <filter-name>WhiteList</filter-name>
         <url-pattern>/users/</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>WhiteList</filter-name>
+        <url-pattern>/courses/</url-pattern>
     </filter-mapping>
 </web-app>

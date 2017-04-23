@@ -11,10 +11,6 @@ public class Course {
 
     private static final Logger LOGGER = Logger.getLogger(Course.class);
 
-    static {
-        DOMConfigurator.configure("log4j.xml");
-    }
-
     private int id;
     private String title;
     private String description;
@@ -25,13 +21,6 @@ public class Course {
         this.title = title;
         this.description = description;
         this.authorId = authorId;
-    }
-
-    public Course() {
-        this.id = -1;
-        this.title = null;
-        this.description = null;
-        this.authorId = -1;
     }
 
     public int getId() {
