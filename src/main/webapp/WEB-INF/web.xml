@@ -9,17 +9,26 @@
         <servlet-name>AuthController</servlet-name>
         <servlet-class>main.controllers.AuthController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>UserController</servlet-name>
-        <servlet-class>main.controllers.UserController</servlet-class>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>AuthController</servlet-name>
         <url-pattern>/auth/</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserController</servlet-name>
+        <servlet-class>main.controllers.UserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/users/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>WhiteList</filter-name>
+        <filter-class>main.filters.WhiteList</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>WhiteList</filter-name>
+        <url-pattern>/users/</url-pattern>
+    </filter-mapping>
 </web-app>
