@@ -11,4 +11,7 @@ import java.util.List;
 public interface UserService {
     User auth(String login, String password);
     List<User> getList();
+    int add(User user);
+    User getById(int id);
+    int update(User user);
 }

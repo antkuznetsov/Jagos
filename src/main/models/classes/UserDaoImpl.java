@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM users"
+                    "SELECT * FROM users ORDER BY id"
             );
 
             ResultSet result = statement.executeQuery();
@@ -53,19 +53,100 @@ public class UserDaoImpl implements UserDao {
     }
 
     public User getById(int id) {
-        return null;
+        User user = null;
+
+        Connection connection = MyConnection.connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM users WHERE id = ?"
+            );
+
+            statement.setInt(1, id);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                user = new User(
+                        result.getInt(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getBoolean(7)
+                );
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getStackTrace());
+        }
+
+        return user;
     }
 
-    public int add(User student) {
-        return 0;
+    public int add(User user) {
+
+        int userId = 0;
+
+        Connection connection = MyConnection.connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO users (name, last_name, email, password, group_id, is_blocked) values (?,?,?,?,?,?)"
+            );
+
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPassword());
+            statement.setInt(5, user.getGroup());
+            statement.setBoolean(6, user.isBlocked());
+
+            ResultSet demo = statement.executeQuery();
+
+            LOGGER.debug("Добавляем пользователя");
+            LOGGER.debug(demo);
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getStackTrace());
+        }
+        return userId; //todo: переделать, чтобы возвращал реальный id
     }
 
     public int delete(int id) {
         return 0;
     }
 
-    public int update(User student) {
-        return 0;
+    public int update(User user) {
+
+        int userId = 0;
+
+        Connection connection = MyConnection.connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE users set name = ?, last_name = ?, email = ? WHERE id = ?"
+            );
+
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getId());
+            //statement.setString(4, user.getPassword());
+            //statement.setInt(5, user.getGroup());
+            //statement.setBoolean(6, user.isBlocked());
+
+            ResultSet demo = statement.executeQuery();
+
+            LOGGER.debug("Обновляем пользователя");
+            LOGGER.debug(demo);
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getStackTrace());
+        }
+        return userId; //todo: переделать, чтобы возвращал реальный id
+
     }
 
     public User getByEmailAndPassword(String email, String password) {
@@ -99,6 +180,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             LOGGER.error(e.getStackTrace());
         }
+
         return user;
     }
 }

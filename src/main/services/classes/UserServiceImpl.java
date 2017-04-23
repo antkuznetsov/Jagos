@@ -35,4 +35,16 @@ public class UserServiceImpl implements UserService {
     public List<User> getList() {
         return userDao.getList();
     }
+
+    public int add(User user) {
+        return userDao.add(user);
+    }
+
+    public User getById(int id) {
+        return userDao.getById(id);
+    }
+
+    public int update(User user) {
+        return userDao.update(user);
+    }
 }

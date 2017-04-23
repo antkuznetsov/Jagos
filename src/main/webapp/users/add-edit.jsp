@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
 
-    <title>Пользователи</title>
+    <title><%=request.getAttribute("title")%></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -60,66 +60,49 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/comments/">Комментарии</a>
                 </li>
-            </ul>
-
-            <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="/users/">Пользователи <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nav item again</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">One more nav</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Another nav item</a>
-                </li>
-            </ul>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nav item again</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">One more nav</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Another nav item</a>
                 </li>
             </ul>
         </nav>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1>Пользователи</h1>
-            <a href="?add=y" class="add btn btn-primary">Добавить</a><br>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Имя</th>
-                        <th>Фамилия</th>
-                        <th>E-mail</th>
-                        <th>Управление</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${requestScope.list}" var="item">
-                        <tr>
-                            <td><c:out value="${item.id}"/></td>
-                            <td><c:out value="${item.name}"/></td>
-                            <td><c:out value="${item.lastName}"/></td>
-                            <td><c:out value="${item.email}"/></td>
-                            <td>
-                                <a class="edit" href="?edit=<c:out value="${item.id}"/>">Редактировать</a>
-                                <a class="delete" href="#">Удалить</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+            <h1><%=request.getAttribute("title")%></h1>
+            <form class="col-sm-5" method="post">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Введите ваше имя" value="<c:out value="${user.name}" />">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Ваша фамилия</label>
+                    <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Введите вашу фамилию" value="<c:out value="${user.lastName}" />">
+                </div>
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите ваш email" value="<c:out value="${user.email}" />">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Введите ваш пароль">
+                </div>
+                <div class="form-group">
+                    <label for="group">Группа</label>
+                    <select name="group" class="form-control" id="group">
+                        <option value="0" disabled selected>Выберите группу</option>
+                        <option value="1">Администратор</option>
+                        <option value="2">Пользователь</option>
+                    </select>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="isBlocked" type="checkbox" class="form-check-input">
+                        Заблокировать
+                    </label>
+                </div>
+                <input name="userId" type="hidden" value="<c:out value="${user.id}" />">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
         </main>
     </div>
 </div>
@@ -130,8 +113,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="../js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
