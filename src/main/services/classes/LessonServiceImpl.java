@@ -18,6 +18,10 @@ public class LessonServiceImpl implements LessonService {
 
     private static LessonDao lessonDao = new LessonDaoImpl();
 
+    public List<Lesson> getListByCourseId(int courseId) {
+        return lessonDao.getListByCourseId(courseId);
+    }
+
     public List<Lesson> getList() {
         return lessonDao.getList();
     }

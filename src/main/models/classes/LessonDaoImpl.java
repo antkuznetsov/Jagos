@@ -20,6 +20,36 @@ public class LessonDaoImpl implements LessonDao {
 
     private static final Logger LOGGER = Logger.getLogger(LessonDaoImpl.class);
 
+    public List<Lesson> getListByCourseId(int courseId) {
+        List<Lesson> lessons = new ArrayList<Lesson>();
+
+        Connection connection = MyConnection.connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM lessons WHERE course_id = ? ORDER BY id"
+            );
+
+            statement.setInt(1, courseId);
+
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                Lesson lesson = new Lesson(
+                        result.getInt(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getInt(4)
+                );
+                lessons.add(lesson);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getStackTrace());
+        }
+        return lessons;
+    }
+
     public List<Lesson> getList() {
 
         List<Lesson> lessons = new ArrayList<Lesson>();

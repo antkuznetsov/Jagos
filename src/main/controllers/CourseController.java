@@ -73,6 +73,8 @@ public class CourseController extends HttpServlet {
 
         String forward = "";
         String action = req.getParameter("action");
+        String courseId = req.getParameter("id");
+        LOGGER.debug(courseId);
 
         if ("new".equalsIgnoreCase(action)) {
 
@@ -94,7 +96,7 @@ public class CourseController extends HttpServlet {
             Course course = courseService.getById(Integer.parseInt(req.getParameter("id")));
             req.setAttribute("course", course);
 
-            List<Lesson> list = lessonService.getList();
+            List<Lesson> list = lessonService.getListByCourseId(Integer.parseInt(courseId));
             req.setAttribute("list", list);
 
             List<User> authors = userService.getList();

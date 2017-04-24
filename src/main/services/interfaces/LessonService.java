@@ -9,6 +9,8 @@ import java.util.List;
  */
 
 public interface LessonService {
+    List<Lesson> getListByCourseId(int courseId);
+
     List<Lesson> getList();
 
     Lesson getById(int id);
