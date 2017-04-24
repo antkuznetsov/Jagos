@@ -1,5 +1,6 @@
 package main.controllers;
 
+import main.models.entities.User;
 import main.services.classes.UserServiceImpl;
 import main.services.interfaces.UserService;
 import org.apache.log4j.Logger;
@@ -40,9 +41,12 @@ public class AuthController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (userService.auth(email, password) != null) {
+        User user = userService.auth(email, password);
+
+        if (user != null) {
             LOGGER.debug("Пользователь авторизован");
             req.getSession().setAttribute("email", email);
+            req.getSession().setAttribute("group", user.getGroup());
             resp.sendRedirect(req.getContextPath() + "/dashboard/");
         } else {
             LOGGER.debug("Ошибка авторизации");

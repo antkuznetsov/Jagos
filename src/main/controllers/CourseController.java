@@ -74,7 +74,6 @@ public class CourseController extends HttpServlet {
         String forward = "";
         String action = req.getParameter("action");
         String courseId = req.getParameter("id");
-        LOGGER.debug(courseId);
 
         if ("new".equalsIgnoreCase(action)) {
 
