@@ -51,23 +51,32 @@
     </servlet-mapping>
 
     <filter>
-        <filter-name>WhiteList</filter-name>
-        <filter-class>main.filters.WhiteList</filter-class>
+        <filter-name>AdminList</filter-name>
+        <filter-class>main.filters.AdminList</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>WhiteList</filter-name>
+        <filter-name>AdminList</filter-name>
         <url-pattern>/users/</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>WhiteList</filter-name>
+        <filter-name>AdminList</filter-name>
         <url-pattern>/courses/</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>WhiteList</filter-name>
+        <filter-name>AdminList</filter-name>
         <url-pattern>/dashboard/</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>WhiteList</filter-name>
+        <filter-name>AdminList</filter-name>
         <url-pattern>/lessons/</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>UserList</filter-name>
+        <filter-class>main.filters.UserList</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserList</filter-name>
+        <url-pattern>/view/</url-pattern>
     </filter-mapping>
 </web-app>
