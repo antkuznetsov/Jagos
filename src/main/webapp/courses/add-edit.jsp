@@ -76,18 +76,15 @@
                 </div>
                 <div class="form-group">
                     <label for="authorId">Автор</label>
-                    <input name="authorId" type="text" class="form-control" id="authorId" placeholder="Выберите автора" value="<c:out value="${course.authorId}" />">
-                </div>
-                <!--
-                <div class="form-group">
-                    <label for="group">Группа</label>
-                    <select name="group" class="form-control" id="group">
-                        <option value="0" disabled selected>Выберите группу</option>
-                        <option value="1">Администратор</option>
-                        <option value="2">Пользователь</option>
+                    <select name="authorId" class="form-control" id="authorId">
+                        <option disabled selected>Выберите автора</option>
+                        <c:forEach items="${requestScope.authors}" var="author">
+                            <option value="<c:out value="${author.id}"/>"<c:if test="${course.authorId == author.id}"> selected</c:if>>
+                                <c:out value="${author.name}"/> <c:out value="${author.lastName}"/>
+                            </option>
+                        </c:forEach>
                     </select>
                 </div>
-                -->
                 <input name="courseId" type="hidden" value="<c:out value="${course.id}" />">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>

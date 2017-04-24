@@ -2,10 +2,13 @@ package main.controllers;
 
 import main.models.entities.Course;
 import main.models.entities.Lesson;
+import main.models.entities.User;
 import main.services.classes.CourseServiceImpl;
 import main.services.classes.LessonServiceImpl;
+import main.services.classes.UserServiceImpl;
 import main.services.interfaces.CourseService;
 import main.services.interfaces.LessonService;
+import main.services.interfaces.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -28,10 +31,19 @@ public class CourseController extends HttpServlet {
 
     public static LessonService lessonService = new LessonServiceImpl();
 
+    public static UserService userService = new UserServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String courseId = req.getParameter("courseId");
+        int authorId = 0;
+
+        if ((req.getParameter("authorId")) == null) {
+            authorId = 1; // Пользователь с ID 1
+        } else {
+            authorId = Integer.parseInt(req.getParameter("authorId"));
+        }
 
         if(courseId == null || courseId.length() == 0) {
 
@@ -39,7 +51,7 @@ public class CourseController extends HttpServlet {
                     1,
                     req.getParameter("title"),
                     req.getParameter("description"),
-                    Integer.parseInt(req.getParameter("authorId"))
+                    authorId
             );
             courseService.add(course);
 
@@ -48,7 +60,7 @@ public class CourseController extends HttpServlet {
                     Integer.parseInt(courseId),
                     req.getParameter("title"),
                     req.getParameter("description"),
-                    Integer.parseInt(req.getParameter("authorId"))
+                    authorId
             );
             courseService.update(course);
         }
@@ -63,8 +75,14 @@ public class CourseController extends HttpServlet {
         String action = req.getParameter("action");
 
         if ("new".equalsIgnoreCase(action)) {
+
             req.setAttribute("title", "Добавить курс");
+
+            List<User> authors = userService.getList();
+            req.setAttribute("authors", authors);
+
             forward = "/courses/add-edit.jsp";
+
         } else if ("delete".equalsIgnoreCase(action)) {
             forward = "/courses/list.jsp";
             courseService.delete(Integer.parseInt(req.getParameter("id")));
@@ -78,6 +96,10 @@ public class CourseController extends HttpServlet {
 
             List<Lesson> list = lessonService.getList();
             req.setAttribute("list", list);
+
+            List<User> authors = userService.getList();
+            req.setAttribute("authors", authors);
+
             forward = "/courses/add-edit.jsp";
 
         } else if ("update".equalsIgnoreCase(action)) {
