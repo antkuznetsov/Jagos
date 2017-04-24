@@ -55,10 +55,7 @@
                     <a class="nav-link active" href="/courses/">Курсы <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Уроки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/comments/">Комментарии</a>
+                    <a class="nav-link" href="#">Комментарии</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/">Пользователи</a>
