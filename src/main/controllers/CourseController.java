@@ -1,8 +1,11 @@
 package main.controllers;
 
 import main.models.entities.Course;
+import main.models.entities.Lesson;
 import main.services.classes.CourseServiceImpl;
+import main.services.classes.LessonServiceImpl;
 import main.services.interfaces.CourseService;
+import main.services.interfaces.LessonService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +25,8 @@ public class CourseController extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(CourseController.class);
 
     public static CourseService courseService = new CourseServiceImpl();
+
+    public static LessonService lessonService = new LessonServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -67,8 +72,12 @@ public class CourseController extends HttpServlet {
             req.setAttribute("list", list);
         } else if ("edit".equalsIgnoreCase(action)) {
             req.setAttribute("title", "Изменить курс");
+
             Course course = courseService.getById(Integer.parseInt(req.getParameter("id")));
             req.setAttribute("course", course);
+
+            List<Lesson> list = lessonService.getList();
+            req.setAttribute("list", list);
             forward = "/courses/add-edit.jsp";
 
         } else if ("update".equalsIgnoreCase(action)) {

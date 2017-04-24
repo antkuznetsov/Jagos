@@ -55,7 +55,10 @@
                     <a class="nav-link active" href="/courses/">Курсы <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Комментарии</a>
+                    <a class="nav-link" href="#">Уроки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comments/">Комментарии</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/">Пользователи</a>
@@ -65,18 +68,14 @@
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <h1><%=request.getAttribute("title")%></h1>
-            <form method="post">
+            <form class="col-sm-5" method="post">
                 <div class="form-group">
                     <label for="title">Название</label>
-                    <input name="title" type="text" class="form-control" id="title" placeholder="Введите название курса" value="<c:out value="${course.title}" />">
+                    <input name="title" type="text" class="form-control" id="title" placeholder="Введите название урока" value="<c:out value="${lesson.title}" />">
                 </div>
                 <div class="form-group">
-                    <label for="description">Описание</label>
-                    <input name="description" type="text" class="form-control" id="description" placeholder="Введите описание курса" value="<c:out value="${course.description}" />">
-                </div>
-                <div class="form-group">
-                    <label for="authorId">Автор</label>
-                    <input name="authorId" type="text" class="form-control" id="authorId" placeholder="Выберите автора" value="<c:out value="${course.authorId}" />">
+                    <label for="content">Содержание</label>
+                    <input name="content" type="text" class="form-control" id="content" placeholder="Введите содержание урока" value="<c:out value="${lesson.content}" />">
                 </div>
                 <!--
                 <div class="form-group">
@@ -88,35 +87,11 @@
                     </select>
                 </div>
                 -->
-                <input name="courseId" type="hidden" value="<c:out value="${course.id}" />">
+                <c:set var="courseId" scope="page" value="${courseId}" />
+                <input name="lessonId" type="hidden" value="<c:out value="${lesson.id}" />">
+                <input name="courseId" type="hidden" value="<c:out value="${lesson.courseId}" default="${courseId}" />">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>
-            <br>
-            <h2>Список уроков</h2>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Название</th>
-                        <th>Управление</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${requestScope.list}" var="item">
-                        <tr>
-                            <td><c:out value="${item.id}"/></td>
-                            <td><c:out value="${item.title}"/></td>
-                            <td>
-                                <a class="edit" href="/lessons/?action=edit&id=<c:out value="${item.id}"/>">Редактировать</a>
-                                <a class="delete" href="/lessons/?action=delete&id=<c:out value="${item.id}"/>&course=<c:out value="${course.id}"/>">Удалить</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <a href="/lessons/?action=new&course=<c:out value="${course.id}" />" class="add btn btn-primary">Добавить</a><br>
-            </div>
         </main>
     </div>
 </div>

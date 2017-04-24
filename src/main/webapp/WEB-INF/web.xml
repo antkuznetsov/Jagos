@@ -33,6 +33,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>LessonController</servlet-name>
+        <servlet-class>main.controllers.LessonController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LessonController</servlet-name>
+        <url-pattern>/lessons/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>main.controllers.DashboardController</servlet-class>
     </servlet>
@@ -56,5 +65,9 @@
     <filter-mapping>
         <filter-name>WhiteList</filter-name>
         <url-pattern>/dashboard/</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>WhiteList</filter-name>
+        <url-pattern>/lessons/</url-pattern>
     </filter-mapping>
 </web-app>

@@ -11,10 +11,6 @@ public class Lesson {
 
     private static final Logger LOGGER = Logger.getLogger(Lesson.class);
 
-    static {
-        DOMConfigurator.configure("log4j.xml");
-    }
-
     private int id;
     private String title;
     private String content;
@@ -25,13 +21,6 @@ public class Lesson {
         this.title = title;
         this.content = content;
         this.courseId = courseId;
-    }
-
-    public Lesson() {
-        this.id = -1;
-        this.title = null;
-        this.content = null;
-        this.courseId = -1;
     }
 
     public int getId() {
