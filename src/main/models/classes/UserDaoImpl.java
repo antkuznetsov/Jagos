@@ -141,16 +141,15 @@ public class UserDaoImpl implements UserDao {
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE users set name = ?, last_name = ?, email = ? WHERE id = ?"
+                    "UPDATE users set name = ?, last_name = ?, email = ?, group_id = ?, is_blocked = ? WHERE id = ?"
             );
 
             statement.setString(1, user.getName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, user.getId());
-            //statement.setString(4, user.getPassword());
-            //statement.setInt(5, user.getGroup());
-            //statement.setBoolean(6, user.isBlocked());
+            statement.setInt(4, user.getGroup());
+            statement.setBoolean(5, user.isBlocked());
+            statement.setInt(6, user.getId());
 
             if (statement.executeUpdate() > 0) {
                 LOGGER.debug("Пользователь обновлен");

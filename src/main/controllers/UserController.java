@@ -28,6 +28,15 @@ public class UserController extends HttpServlet {
 
         String userId = req.getParameter("userId");
 
+        // Присвоим пользователю группу
+        int group = 0;
+
+        if ((req.getParameter("group")) == null) {
+            group = 2; // Обычный пользователь
+        } else {
+            group = Integer.parseInt(req.getParameter("group"));
+        }
+        LOGGER.debug(group);
         if(userId == null || userId.length() == 0) {
 
             User user = new User(
@@ -36,7 +45,7 @@ public class UserController extends HttpServlet {
                     req.getParameter("lastName"),
                     req.getParameter("email"),
                     req.getParameter("password"),
-                    2, //Integer.parseInt(req.getParameter("group")),
+                    group,
                     false
             );
             userService.add(user);
@@ -48,7 +57,7 @@ public class UserController extends HttpServlet {
                     req.getParameter("lastName"),
                     req.getParameter("email"),
                     req.getParameter("password"),
-                    2, //Integer.parseInt(req.getParameter("group")),
+                    group,
                     false
             );
             userService.update(user);

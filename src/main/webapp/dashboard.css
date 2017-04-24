@@ -76,3 +76,7 @@ h1 {
 .edit {
   margin-right: 10px;
 }
+
+tr.admin td {
+  color: green;
+}

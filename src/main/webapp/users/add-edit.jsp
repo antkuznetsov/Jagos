@@ -55,10 +55,7 @@
                     <a class="nav-link" href="/courses/">Курсы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Уроки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/comments/">Комментарии</a>
+                    <a class="nav-link" href="#">Комментарии</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/users/">Пользователи <span class="sr-only">(current)</span></a>
@@ -71,16 +68,15 @@
             <form class="col-sm-5" method="post">
                 <div class="form-group">
                     <label for="name">Ваше имя</label>
-                    <input name="name" type="text" class="form-control" id="name" placeholder="Введите ваше имя" value="<c:out value="${user.name}" />">
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Введите ваше имя" value="<c:out value="${user.name}" />" required>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Ваша фамилия</label>
-                    <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Введите вашу фамилию" value="<c:out value="${user.lastName}" />">
+                    <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Введите вашу фамилию" value="<c:out value="${user.lastName}" />" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Электронная почта</label>
-                    <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите ваш email" value="<c:out value="${user.email}" />">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input name="email" type="email" class="form-control" id="email" placeholder="Введите ваш email" value="<c:out value="${user.email}" />" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -90,8 +86,8 @@
                     <label for="group">Группа</label>
                     <select name="group" class="form-control" id="group">
                         <option value="0" disabled selected>Выберите группу</option>
-                        <option value="1">Администратор</option>
-                        <option value="2">Пользователь</option>
+                        <option value="1"<c:if test="${user.group == 1}"> selected</c:if>>Администратор</option>
+                        <option value="2"<c:if test="${user.group == 2}"> selected</c:if>>Пользователь</option>
                     </select>
                 </div>
                 <div class="form-check">

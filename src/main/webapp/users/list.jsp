@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${requestScope.list}" var="item">
-                        <tr>
+                        <tr<c:if test="${item.group == 1}"> class="admin"</c:if>>
                             <td><c:out value="${item.id}"/></td>
                             <td><c:out value="${item.name}"/></td>
                             <td><c:out value="${item.lastName}"/></td>
