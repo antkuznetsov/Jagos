@@ -22,7 +22,16 @@ public class AuthController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/auth.jsp").forward(req, resp);
+
+        if("logout".equalsIgnoreCase(req.getParameter("action"))) {
+
+            req.getSession().invalidate();
+            LOGGER.debug("Пользователь вышел из системы");
+            resp.sendRedirect("/auth/");
+
+        } else {
+            req.getRequestDispatcher("/auth.jsp").forward(req, resp);
+        }
     }
 
     @Override
