@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input name="isBlocked" type="checkbox" class="form-check-input">
+                        <input name="isBlocked" type="checkbox" class="form-check-input" value="Y"<c:if test="${user.blocked}"> checked</c:if>>
                         Заблокировать
                     </label>
                 </div>

@@ -28,15 +28,23 @@ public class UserController extends HttpServlet {
 
         String userId = req.getParameter("userId");
 
-        // Присвоим пользователю группу
         int group = 0;
+        boolean isBlocked = false;
 
         if ((req.getParameter("group")) == null) {
             group = 2; // Обычный пользователь
         } else {
             group = Integer.parseInt(req.getParameter("group"));
         }
-        LOGGER.debug(group);
+
+        if((req.getParameter("isBlocked")) == null) {
+            isBlocked = false;
+        } else {
+            isBlocked = true;
+        }
+
+        LOGGER.debug(isBlocked);
+
         if(userId == null || userId.length() == 0) {
 
             User user = new User(
@@ -46,7 +54,7 @@ public class UserController extends HttpServlet {
                     req.getParameter("email"),
                     req.getParameter("password"),
                     group,
-                    false
+                    isBlocked
             );
             userService.add(user);
 
@@ -58,7 +66,7 @@ public class UserController extends HttpServlet {
                     req.getParameter("email"),
                     req.getParameter("password"),
                     group,
-                    false
+                    isBlocked
             );
             userService.update(user);
         }
@@ -83,6 +91,7 @@ public class UserController extends HttpServlet {
         } else if ("edit".equalsIgnoreCase(action)) {
             req.setAttribute("title", "Изменить пользователя");
             User user = userService.getById(Integer.parseInt(req.getParameter("id")));
+            LOGGER.debug(user);
             req.setAttribute("user", user);
             forward = "/users/add-edit.jsp";
 
