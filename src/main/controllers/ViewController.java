@@ -27,9 +27,9 @@ public class ViewController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ViewController.class);
 
-//    public static CourseService courseService = new CourseServiceImpl();
+    public static CourseService courseService = new CourseServiceImpl();
 //
-//    public static LessonService lessonService = new LessonServiceImpl();
+    public static LessonService lessonService = new LessonServiceImpl();
 //
 //    public static UserService userService = new UserServiceImpl();
 
@@ -115,9 +115,42 @@ public class ViewController extends HttpServlet {
         RequestDispatcher view = req.getRequestDispatcher(forward);
         view.forward(req, resp);
         */
+        int courseId = 0;
 
-        RequestDispatcher view = req.getRequestDispatcher("/view.jsp" +
-                "");
-        view.forward(req, resp);
+        if (req.getParameter("course") != null) {
+            courseId = Integer.parseInt(req.getParameter("course"));
+        }
+
+        List<Course> list = courseService.getList();
+        req.setAttribute("list", list);
+
+        if( courseId != 0 && req.getParameter("lesson") != null ){
+            LOGGER.debug(req.getParameter("course") + " и " + req.getParameter("lesson"));
+
+            Lesson lesson = lessonService.getById(Integer.parseInt(req.getParameter("lesson")));
+            req.setAttribute("lesson", lesson);
+
+            RequestDispatcher view = req.getRequestDispatcher("/view/lesson-detail.jsp");
+            view.forward(req, resp);
+
+        } else if(courseId != 0) {
+            LOGGER.debug(req.getParameter("course"));
+
+            Course course = courseService.getById(courseId);
+            req.setAttribute("course", course);
+
+            List<Lesson> lessonsList = lessonService.getListByCourseId(courseId);
+            req.setAttribute("lessonsList", lessonsList);
+
+            RequestDispatcher view = req.getRequestDispatcher("/view/lesson-list.jsp");
+            view.forward(req, resp);
+
+        } else {
+            LOGGER.debug("Главная");
+
+            RequestDispatcher view = req.getRequestDispatcher("/view/main.jsp");
+            view.forward(req, resp);
+        }
+
     }
 }
