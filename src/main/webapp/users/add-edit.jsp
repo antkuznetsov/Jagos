@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Введите ваш пароль">
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Введите ваш пароль" required>
                 </div>
                 <div class="form-group">
                     <label for="group">Группа</label>

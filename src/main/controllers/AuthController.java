@@ -3,6 +3,7 @@ package main.controllers;
 import main.models.entities.User;
 import main.services.classes.UserServiceImpl;
 import main.services.interfaces.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -39,7 +40,7 @@ public class AuthController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String password = DigestUtils.md5Hex(req.getParameter("password"));
 
         User user = userService.auth(email, password);
 

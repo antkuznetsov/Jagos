@@ -3,6 +3,7 @@ package main.models.classes;
 import main.models.MyConnection;
 import main.models.entities.User;
 import main.models.interfaces.UserDao;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -98,7 +99,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
-            statement.setString(4, user.getPassword());
+            statement.setString(4, DigestUtils.md5Hex(user.getPassword()));
             statement.setInt(5, user.getGroup());
             statement.setBoolean(6, user.isBlocked());
 
@@ -141,15 +142,16 @@ public class UserDaoImpl implements UserDao {
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE users set name = ?, last_name = ?, email = ?, group_id = ?, is_blocked = ? WHERE id = ?"
+                    "UPDATE users set name = ?, last_name = ?, email = ?, password = ?, group_id = ?, is_blocked = ? WHERE id = ?"
             );
 
             statement.setString(1, user.getName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, user.getGroup());
-            statement.setBoolean(5, user.isBlocked());
-            statement.setInt(6, user.getId());
+            statement.setString(4, DigestUtils.md5Hex(user.getPassword()));
+            statement.setInt(5, user.getGroup());
+            statement.setBoolean(6, user.isBlocked());
+            statement.setInt(7, user.getId());
 
             if (statement.executeUpdate() > 0) {
                 LOGGER.debug("Пользователь обновлен");
