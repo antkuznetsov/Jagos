@@ -1,5 +1,6 @@
 package main.models.classes;
 
+import main.models.JagosException;
 import main.models.MyConnection;
 import main.models.entities.Lesson;
 import main.models.interfaces.LessonDao;

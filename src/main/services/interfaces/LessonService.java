@@ -1,5 +1,6 @@
 package main.services.interfaces;
 
+import main.models.JagosException;
 import main.models.entities.Lesson;
 
 import java.util.List;

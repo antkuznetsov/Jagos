@@ -1,5 +1,6 @@
 package main.controllers;
 
+import main.models.JagosException;
 import main.models.entities.Course;
 import main.models.entities.Lesson;
 import main.models.entities.User;
@@ -86,6 +87,14 @@ public class CourseController extends HttpServlet {
 
         } else if ("delete".equalsIgnoreCase(action)) {
             forward = "/courses/list.jsp";
+            /*
+            try {
+
+            }
+            catch (JagosException ex){
+                //redirect or popup
+            }
+            */
             courseService.delete(Integer.parseInt(req.getParameter("id")));
             List<Course> list = courseService.getList();
             req.setAttribute("list", list);

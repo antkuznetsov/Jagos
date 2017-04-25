@@ -6,10 +6,12 @@ import main.services.interfaces.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -56,7 +58,13 @@ public class AuthController extends HttpServlet {
             }
         } else {
             LOGGER.debug("Ошибка авторизации");
-            resp.sendRedirect("/auth/");
+            //HttpSession session = req.getSession(false);
+            //session.setAttribute("er", "Ошибка авторизации!");
+            //resp.sendRedirect("/auth/");
+
+            req.setAttribute("er", "Ошибка авторизации");
+            RequestDispatcher view = req.getRequestDispatcher("/auth.jsp");
+            view.forward(req, resp);
         }
     }
 }

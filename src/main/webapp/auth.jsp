@@ -22,9 +22,10 @@
     <form class="form-signin" action="/auth/" method="post">
         <h2 class="form-signin-heading">Авторизация</h2>
         <label for="inputEmail" class="sr-only">E-mail</label>
-        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus value="kz@mail.ru">
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus value="">
         <label for="inputPassword" class="sr-only">Пароль</label>
-        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required value="qwerty">
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required value="">
+        <c:out value="${er}" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
     </form>
 

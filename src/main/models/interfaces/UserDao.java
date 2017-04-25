@@ -1,5 +1,6 @@
 package main.models.interfaces;
 
+import main.models.JagosException;
 import main.models.entities.User;
 
 import java.util.ArrayList;

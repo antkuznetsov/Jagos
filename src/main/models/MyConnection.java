@@ -18,6 +18,7 @@ public class MyConnection {
     private static final String DBLOGIN = "postgres";
     private static final String DBPASSWORD = "656450";
 
+    //public static Connection connect() throws JagosException {
     public static Connection connect() {
 
         Connection connection = null;
@@ -26,12 +27,14 @@ public class MyConnection {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             LOGGER.error("Проблема с драйвером");
+            //throw new JagosException();
         }
 
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost/" + DBNAME, DBLOGIN, DBPASSWORD);
         } catch (SQLException e) {
             LOGGER.error("Проблема с соединением");
+            //throw new JagosException();
         }
 
         return connection;

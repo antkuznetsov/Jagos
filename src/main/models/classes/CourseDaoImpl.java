@@ -123,6 +123,7 @@ public class CourseDaoImpl implements CourseDao {
 
         } catch (SQLException e) {
             LOGGER.error(e.getStackTrace());
+            //throw new JagosException();
         }
     }
 
