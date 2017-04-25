@@ -47,7 +47,12 @@ public class AuthController extends HttpServlet {
             LOGGER.debug("Пользователь авторизован");
             req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("group", user.getGroup());
-            resp.sendRedirect(req.getContextPath() + "/dashboard/");
+
+            if(user.getGroup() == 1) {
+                resp.sendRedirect(req.getContextPath() + "/dashboard/");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/view/");
+            }
         } else {
             LOGGER.debug("Ошибка авторизации");
             resp.sendRedirect("/auth/");

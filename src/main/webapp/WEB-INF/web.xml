@@ -42,6 +42,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ViewController</servlet-name>
+        <servlet-class>main.controllers.ViewController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewController</servlet-name>
+        <url-pattern>/view/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>main.controllers.DashboardController</servlet-class>
     </servlet>
