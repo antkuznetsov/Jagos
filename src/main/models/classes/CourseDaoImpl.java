@@ -4,6 +4,7 @@ import main.models.MyConnection;
 import main.models.entities.Course;
 import main.models.interfaces.CourseDao;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.util.List;
  * Created by Kuznetsov on 22/04/2017.
  */
 
+@Repository
 public class CourseDaoImpl implements CourseDao {
 
     private static final Logger LOGGER = Logger.getLogger(CourseDaoImpl.class);

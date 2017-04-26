@@ -1,11 +1,12 @@
 package main.services.classes;
 
-import main.models.JagosException;
 import main.models.classes.LessonDaoImpl;
 import main.models.entities.Lesson;
 import main.models.interfaces.LessonDao;
 import main.services.interfaces.LessonService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,11 +14,13 @@ import java.util.List;
  * Created by Kuznetsov on 22/04/2017.
  */
 
+@Service
 public class LessonServiceImpl implements LessonService {
 
     private static final Logger LOGGER = Logger.getLogger(LessonServiceImpl.class);
 
-    private static LessonDao lessonDao = new LessonDaoImpl();
+    @Autowired
+    private LessonDao lessonDao;
 
     public List<Lesson> getListByCourseId(int courseId) {
         return lessonDao.getListByCourseId(courseId);

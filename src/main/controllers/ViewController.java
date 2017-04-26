@@ -10,8 +10,11 @@ import main.services.interfaces.CourseService;
 import main.services.interfaces.LessonService;
 import main.services.interfaces.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +30,18 @@ public class ViewController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ViewController.class);
 
-    public static CourseService courseService = new CourseServiceImpl();
-    public static LessonService lessonService = new LessonServiceImpl();
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private LessonService lessonService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.
+                processInjectionBasedOnServletContext(this,
+                        config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -4,8 +4,11 @@ import main.models.entities.User;
 import main.services.classes.UserServiceImpl;
 import main.services.interfaces.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +24,17 @@ public class UserController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
-    public static UserService userService = new UserServiceImpl();
+    //public static UserService userService = new UserServiceImpl(); //Должно уйти
+    @Autowired
+    public UserService userService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.
+                processInjectionBasedOnServletContext(this,
+                        config.getServletContext());
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

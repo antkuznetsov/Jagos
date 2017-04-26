@@ -6,6 +6,7 @@ import main.models.entities.User;
 import main.models.interfaces.UserDao;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ import java.util.List;
  * Created by Kuznetsov on 22/04/2017.
  */
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);

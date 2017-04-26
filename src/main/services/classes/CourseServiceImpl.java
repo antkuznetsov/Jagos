@@ -5,6 +5,8 @@ import main.models.entities.Course;
 import main.models.interfaces.CourseDao;
 import main.services.interfaces.CourseService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,11 +14,13 @@ import java.util.List;
  * Created by Kuznetsov on 22/04/2017.
  */
 
+@Repository
 public class CourseServiceImpl implements CourseService {
 
     private static final Logger LOGGER = Logger.getLogger(CourseServiceImpl.class);
 
-    private static CourseDao courseDao = new CourseDaoImpl();
+    @Autowired
+    private CourseDao courseDao;
 
     public List<Course> getList() {
         return courseDao.getList();
